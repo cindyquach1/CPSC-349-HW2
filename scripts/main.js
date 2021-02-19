@@ -81,34 +81,95 @@ function initializeEvents() {
 
 initializeEvents();
 
-// check which index you are currently at
-// for prev button - go to the left 1 index
-// get and set detials for next index's info
+// Previous Button
 var left_btn = document.querySelector('.left-button');
 left_btn.addEventListener('click', ()=> {
-    console.log('Previous clicked!');
+    // Retrieve array
     var thumbnails = getThumbnailsArray();
-
+    // Retrieves current image being displayed
+    var detailImage = document.querySelector(DETAIL_IMAGE_SELECTOR);
+    var a = detailImage.getAttribute('src');
+    var curr;
+    // Finds the current image and matches it to item in thumbnail array
     for (i = 0; i < thumbnails.length; i++) {
-        i = i + 1;
-        i = i % thumbnails.length;
-        setDetailsFromThumb(thumbnails[i]);
+        var b = thumbnails[i].getAttribute('data-image-url');
+        console.log(b);
+        if (a === b) {
+            console.log("true");
+            curr = thumbnails[i];
+            console.log('Curr = ', curr);
+        }
     }
+
+    // Assigns index to the current image being displayed
+    if(curr.getAttribute('data-image-url') === 'img/otter1.jpg') {
+        curr = 0;
+        console.log(curr);
+    } else if (curr.getAttribute('data-image-url') === 'img/otter2.jpg') {
+        curr = 1;
+        console.log(curr);
+    } else if (curr.getAttribute('data-image-url') === 'img/otter3.jpg') {
+        curr = 2;
+        console.log(curr);
+    } else if (curr.getAttribute('data-image-url') === 'img/otter4.jpg') {
+        curr = 3;
+        console.log(curr);
+    } else if (curr.getAttribute('data-image-url') === 'img/otter5.jpg') {
+        curr = 4;
+        console.log(curr);
+    }
+
+    // Displays the previous image in array
+    if(curr === 0) {
+        curr = thumbnails.length;
+    }
+    curr = curr - 1;
+    console.log('i = ', curr);
+    setDetailsFromThumb(thumbnails[curr]);
 });
 
-// check which index you are currently at
-// for next button - go to the right 1 index
-// get and set details for next index's info
+// Next button
 var right_btn = document.querySelector('.right-button');
 right_btn.addEventListener('click', ()=> {
-    console.log('Next clicked!');
+    // Retrieve array
     var thumbnails = getThumbnailsArray();
 
-    for(i = 0; i < thumbnails.length; i++) {
-        if(i === 0) {
-            i = thumbnails.length;
+    // Retrieves current image being displayed
+    var detailImage = document.querySelector(DETAIL_IMAGE_SELECTOR);
+    var a = detailImage.getAttribute('src');
+    var curr;
+
+    // Finds the current image and matches it to item in thumbnail array
+    for (i = 0; i < thumbnails.length; i++) {
+        var b = thumbnails[i].getAttribute('data-image-url');
+        console.log(b);
+        if (a === b) {
+            console.log("true");
+            curr = thumbnails[i];
+            console.log('Curr = ', curr);
         }
-        i = i - 1;
-        setDetailsFromThumb(thumbnails[i]);
     }
+
+    // Assigns index to the current image being displayed
+    if(curr.getAttribute('data-image-url') === 'img/otter1.jpg') {
+        curr = 0;
+        console.log(curr);
+    } else if (curr.getAttribute('data-image-url') === 'img/otter2.jpg') {
+        curr = 1;
+        console.log(curr);
+    } else if (curr.getAttribute('data-image-url') === 'img/otter3.jpg') {
+        curr = 2;
+        console.log(curr);
+    } else if (curr.getAttribute('data-image-url') === 'img/otter4.jpg') {
+        curr = 3;
+        console.log(curr);
+    } else if (curr.getAttribute('data-image-url') === 'img/otter5.jpg') {
+        curr = 4;
+        console.log(curr);
+    }
+
+    // Displays next image in array
+    curr = curr + 1;
+    curr = curr % thumbnails.length;
+    setDetailsFromThumb(thumbnails[curr]);
 });
